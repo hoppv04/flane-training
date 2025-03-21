@@ -1,0 +1,20 @@
+{
+  "name": "bot_scrape_flane",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "start": "func start --verbose"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.6.1",
+    "@azure/storage-blob": "^12.26.0",
+    "@azure/storage-file-datalake": "^12.25.0",
+    "@azure/storage-queue": "^12.25.0",
+    "playwright": "^1.50.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4"
+  }
+}
