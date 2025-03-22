@@ -4,9 +4,11 @@ import { waitLoad } from "../utils/waitLoad";
 import { trainingSelectors } from "../configs";
 import { createLogger } from "../utils/createLogger";
 import { ITraining } from "../interfaces/ITraining";
+import { appendJobToAzureBlob } from "../utils/appendTrainingToAzureBlob";
 
 export const scrapeTrainingDetail = async (loggerReceive: ILogger) => {
   const sourceUri = "https://www.flane.de";
+  const companyName = "Flane";
   const logger = createLogger(loggerReceive, "FLANE-TRAINING");
   const browser = await chromium.launch({ headless: false });
 
@@ -49,12 +51,10 @@ export const scrapeTrainingDetail = async (loggerReceive: ILogger) => {
         miningAt: new Date(),
       };
 
-      logger.info("Data:", rowData);
+      await appendJobToAzureBlob(rowData, companyName, logger);
     }
   } catch (error) {
   } finally {
     await browser.close();
   }
 };
-
-scrapeTrainingDetail(console);
